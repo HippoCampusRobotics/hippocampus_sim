@@ -1,0 +1,97 @@
+<?xml version='1.0'?>
+
+<robot name="uuv_hippocampus" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="rotor" params="number">
+        <!-- CCW 1: rotor 0 -->
+        <xacro:if value="${number == 0}">  
+            <xacro:property name="rotorLinkOrigin">
+                <origin xyz="-0.05 0.0481 0.0481" rpy="0 1.570796 0"/>
+            </xacro:property>
+            <xacro:property name="turningDirection" value="ccw"/>
+            <xacro:property name="rotorColor" value="Gazebo/Red"/>
+        </xacro:if>
+
+        <!-- CW 2: rotor 1 -->
+        <xacro:if value="${number == 1}">
+            <xacro:property name="rotorLinkOrigin">
+                <origin xyz="-0.05 -0.0481 0.0481" rpy="0 1.570796 0"/>
+            </xacro:property>
+            <xacro:property name="turningDirection" value="cw"/>
+            <xacro:property name="rotorColor" value="Gazebo/Green"/>
+        </xacro:if>
+        
+        <!-- CCW 3: rotor 2 -->
+        <xacro:if value="${number == 2}">
+            <xacro:property name="rotorLinkOrigin">
+                <origin xyz="-0.05 -0.0481 -0.0481" rpy="0 1.570796 0"/>
+            </xacro:property>
+            <xacro:property name="turningDirection" value="ccw"/>
+            <xacro:property name="rotorColor" value="Gazebo/Blue"/>
+        </xacro:if>
+
+        <!-- CW 4: rotor 3 -->
+        <xacro:if value="${number == 3}">
+            <xacro:property name="rotorLinkOrigin">
+                <origin xyz="-0.05 0.0481 -0.0481" rpy="0 1.570796 0"/>
+            </xacro:property>
+            <xacro:property name="turningDirection" value="cw"/>
+            <xacro:property name="rotorColor" value="Gazebo/Blue"/>
+        </xacro:if>
+
+        <!-- rotor link -->
+        <link name="base_link_${ID}/rotor_${number}">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="${rotorMass}"/>
+                <xacro:insert_block name="rotorInertia"/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 -1.570796 0"/>
+                <geometry>
+                    <mesh filename="package://hippocampus_sim/models/uuv_hippocampus/meshes/uuv_hippocampus_prop.stl" scale="1 1 1" />
+                </geometry>
+            </visual>
+        </link>
+
+        <!-- rotor joint -->
+        <joint name="base_link_${ID}/rotor_${number}_joint" type="revolute">
+            <xacro:insert_block name="rotorLinkOrigin"/>
+            <child link="base_link_${ID}/rotor_${number}"/>
+            <parent link="base_link_${ID}"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="-1e+16" upper="1e+16" effort="-1" velocity="-1"/>  <!-- effort and velocity are required in urdf files, in sdf files they default to -1 -->
+        </joint>
+
+        <gazebo reference="base_link_${ID}/rotor_${number}">
+            <velocity_decay />
+            <material>${rotorColor}</material>
+        </gazebo>
+
+        <gazebo reference="base_link_${ID}/rotor_${number}_joint">
+            <use_parent_model_frame>1</use_parent_model_frame>
+        </gazebo>
+
+        <gazebo>
+            <plugin name='motor_${number}_model' filename='libgazebo_motor_model.so'>
+                <robotNamespace />
+                <reversible>true</reversible>
+                <jointName>base_link_${ID}/rotor_${number}_joint</jointName>
+                <linkName>base_link_${ID}/rotor_${number}</linkName>
+                <turningDirection>${turningDirection}</turningDirection>
+                <timeConstantUp>0.0125</timeConstantUp>
+                <timeConstantDown>0.025</timeConstantDown>
+                <maxRotVelocity>800</maxRotVelocity>
+                <motorConstant>1.1e-05</motorConstant>
+                <momentConstant>0.0024</momentConstant>
+                <rotorDragCoefficient>0.0</rotorDragCoefficient>
+                <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
+                <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+                <motorNumber>${number}</motorNumber>
+                <motorSpeedPubTopic>/motor_speed/${number}</motorSpeedPubTopic>
+                <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+            </plugin>
+        </gazebo>
+        
+    </xacro:macro>
+</robot>

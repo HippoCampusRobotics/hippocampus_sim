@@ -1,0 +1,97 @@
+<launch>
+    <!-- vehicle names (= namespace vehicle specific nodes will be launched in) -->
+    <arg name="vehicle_1_name" default="uuv00" />
+    <arg name="vehicle_2_name" default="uuv01" />
+
+    <arg name="gui" default="true" />
+    <arg name="verbose" default="true" />
+    <arg name="rviz" default="false" />
+
+    <arg name="x" default="0.3" />
+    <arg name="y" default="0.3" />
+    <arg name="z" default="0.0" />
+    <arg name="Y" default="1.57" />
+    <arg name="P" default="0.0" />
+    <arg name="R" default="0.0" />
+
+    <!-- px4 setting -->
+    <arg name="interactive" default="true" />
+
+    <!-- start gazebo with the specified world -->
+    <include file="$(find hippocampus_sim)/launch/gazebo_base.launch">
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="verbose" value="$(arg verbose)" />
+    </include>
+
+    <!-- Spawn Apriltag Tank -->
+    <include file="$(find hippocampus_sim)/launch/spawn_apriltag_tank.launch" />
+
+    <!-- Spawn Multi-Hippo-Vehicle -->
+    <node name="vehicle_spawn" output="screen" pkg="gazebo_ros" type="spawn_model" args="-sdf -file $(find hippocampus_sim)/models/uuv_multi_hippocampus/uuv_multi_hippocampus_2.sdf -model uuv_hippocampus -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)" />
+
+    <!-- use the group tag to launch nodes in a namespace -->
+    <group ns="uuv00">
+
+        <!-- MAVROS and vehicle configs -->
+        <!-- <arg name="ID" value="$(arg ID)"/> -->
+        <arg name="bind_port" value="14540" />
+        <arg name="remote_port" value="14580" />
+        <arg name="fcu_url" default="udp://:$(arg bind_port)@localhost:$(arg remote_port)" />
+
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url) "/>
+            <arg name="gcs_url" value="" />
+            <arg name="tgt_system" value="1"/>
+            <arg name="tgt_component" value="1" />
+        </include> 
+
+        <!-- Posix SITL environment launch script -->
+        <!-- launches PX4 SITL -->
+        <arg name="run_px4" default="true" />
+        <!-- vehcile model and config -->
+        <arg name="est" default="ekf2" />
+        <arg name="vehicle" default="uuv_hippocampus" />
+        <!-- <arg name="ID" default="1" /> -->
+        <env name="PX4_SIM_MODEL" value="$(arg vehicle)" />
+        <env name="PX4_ESTIMATOR" value="$(arg est)" />
+        
+        <!-- PX4 SITL -->
+        <arg unless="$(arg interactive)" name="px4_command_arg1" value="-d" />
+        <arg if="$(arg interactive)" name="px4_command_arg1" value="" />
+        <node if="$(arg run_px4)" name="sitl_0" pkg="px4" type="px4" output="screen" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i 0 -w sitl_$(arg vehicle)_0 $(arg px4_command_arg1)"></node>
+
+    </group>
+
+    <group ns="uuv01">
+        <!-- MAVROS and vehicle configs -->
+        <!-- <arg name="ID" value="$(arg ID)"/> -->
+        <arg name="bind_port" value="14541" />
+        <arg name="remote_port" value="14581" />
+        <arg name="fcu_url" default="udp://:$(arg bind_port)@localhost:$(arg remote_port)" />
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url) "/>
+            <arg name="gcs_url" value="" />
+            <arg name="tgt_system" value="2"/>
+            <arg name="tgt_component" value="1" />
+        </include> 
+
+        <!-- Posix SITL environment launch script -->
+        <!-- launches PX4 SITL -->
+        <arg name="run_px4" default="true" />
+        <!-- vehcile model and config -->
+        <arg name="est" default="ekf2" />
+        <arg name="vehicle" default="uuv_hippocampus" />
+        <!-- <arg name="ID" default="1" /> -->
+        <env name="PX4_SIM_MODEL" value="$(arg vehicle)" />
+        <env name="PX4_ESTIMATOR" value="$(arg est)" />
+
+        <!-- PX4 SITL -->
+        <arg unless="$(arg interactive)" name="px4_command_arg1" value="-d" />
+        <arg if="$(arg interactive)" name="px4_command_arg1" value="" />
+        <node if="$(arg run_px4)" name="sitl_1" pkg="px4" type="px4" output="screen" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i 1 -w sitl_$(arg vehicle)_1 $(arg px4_command_arg1)"></node>
+
+    </group>
+
+</launch>

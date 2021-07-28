@@ -1,0 +1,76 @@
+<?xml version='1.0'?>
+
+<robot name="uuv_hippocampus" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <!-- Physical Properties -->
+        <!--
+    These values are a compromise between the dry mass and added mass
+    values used to correct for hydrodynamic effects.
+    Real values:  m = 1,47 kg; Ixx = 0,002408 kgm2; Iyy = Izz = 0.010717 kgm2
+                    Xu = -1,11 kg; Yv = Zw = -2,8 kg; Kp = -0,00451 kgm2; Mq = Nr = -0,0163 kgm2
+
+    No gravity since weight andes draft force are assumed to be equal for the hippocampus uuv
+    -->
+    <xacro:property name="baseLinkMass" value="1.47" />
+    <xacro:property name="baseLinkInertiaX" value="0.0024"/>
+    <xacro:property name="baseLinkInertiaY" value="0.010717"/>
+    <xacro:property name="baseLinkInertiaZ" value="0.010717"/>
+    <xacro:property name="baseLinkInertia"> 
+        <inertia ixx="${baseLinkInertiaX}" ixy="0" ixz="0" iyy="${baseLinkInertiaY}" iyz="0" izz="${baseLinkInertiaZ}" />
+    </xacro:property>
+
+    <!-- Thruster Properties -->
+    <xacro:property name="rotorMass" value="0.005"/>
+    <xacro:property name="rotorInertiaX" value="9.75e-07"/>
+    <xacro:property name="rotorInertiaY" value="0.000273104"/>
+    <xacro:property name="rotorInertiaZ" value="0.000273104"/>
+    <xacro:property name="rotorInertia"> 
+        <inertia ixx="${rotorInertiaX}" ixy="0" ixz="0" iyy="${rotorInertiaY}" iyz="0" izz="${rotorInertiaZ}" />
+    </xacro:property>
+
+    <!-- Baro Properties -->
+    <xacro:property name="baroLinkPosX" value="0.0"/>
+    <xacro:property name="baroLinkPosY" value="0.0"/>
+    <xacro:property name="baroLinkPosZ" value="-0.05"/>
+    <xacro:property name="baroLinkOrigin">
+        <origin xyz="${baroLinkPosX} ${baroLinkPosY} ${baroLinkPosZ}" rpy="0 0 0" />
+    </xacro:property>
+    <xacro:property name="baroLinkMass" value="0.001" />
+    <xacro:property name="baroLinkInertiaX" value="1e-8"/>
+    <xacro:property name="baroLinkInertiaY" value="1e-8"/>
+    <xacro:property name="baroLinkInertiaZ" value="1e-8"/>
+    <xacro:property name="baroLinkInertia"> 
+        <inertia ixx="${baroLinkInertiaX}" ixy="0" ixz="0" iyy="${baroLinkInertiaY}" iyz="0" izz="${baroLinkInertiaZ}" />
+    </xacro:property>
+
+    <!-- IMU Properties -->
+    <xacro:property name="imuLinkMass" value="0.015"/>
+    <xacro:property name="imuLinkInertiaX" value="1e-5"/>
+    <xacro:property name="imuLinkInertiaY" value="1e-5"/>
+    <xacro:property name="imuLinkInertiaZ" value="1e-5"/>
+    <xacro:property name="imuLinkInertia"> 
+        <inertia ixx="${imuLinkInertiaX}" ixy="0" ixz="0" iyy="${imuLinkInertiaY}" iyz="0" izz="${imuLinkInertiaZ}" />
+    </xacro:property>
+
+    <!-- Camera Properties -->
+    <xacro:property name="cameraOrigin">
+        <origin xyz="0.05 0 -0.02" rpy="0 1.57 0"/>
+    </xacro:property>
+    <xacro:property name="cameraLinkMass" value="0.001"/>
+    <xacro:property name="cameraLinkInertiaX" value="1e-8"/>
+    <xacro:property name="cameraLinkInertiaY" value="1e-8"/>
+    <xacro:property name="cameraLinkInertiaZ" value="1e-8"/>
+    <xacro:property name="cameraLinkInertia"> 
+        <inertia ixx="${cameraLinkInertiaX}" ixy="0" ixz="0" iyy="${cameraLinkInertiaY}" iyz="0" izz="${cameraLinkInertiaZ}" />
+    </xacro:property>
+    <xacro:property name="cameraWidth" value="640"/>
+    <xacro:property name="cameraHeight" value="480"/>
+    <xacro:property name="cameraFormat" value="R8G8B8"/>
+    <xacro:property name="cameraClipNear" value="0.08"/>
+    <xacro:property name="cameraClipFar" value="300"/>
+    <xacro:property name="cameraNoiseType" value="gaussian"/>
+    <xacro:property name="cameraNoiseMean" value="0.0"/>
+    <xacro:property name="cameraNoiseStddev" value="0.1"/>
+    <!-- ... -->
+
+</robot>

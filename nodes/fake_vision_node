@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+import rospy
+from hippocampus_common.node import Node
+from geometry_msgs.msg import PoseWithCovarianceStamped
+from nav_msgs.msg import Odometry
+
+
+class FakeVisionNode(Node):
+    def __init__(self, name):
+        super().__init__(name=name)
+
+        self.rate = rospy.Rate(30.0)
+        self.pose = None
+        self.header = None
+        self.initialized = False
+        self.ground_truth_topic = Node.get_param("~topic_name")
+        rospy.logerr("[{}] Ground truth topic: [{}]".format(rospy.get_name(), self.ground_truth_topic))
+
+        self.fake_vision_pub = rospy.Publisher("mavros/vision_pose/pose_cov",
+                                               PoseWithCovarianceStamped,
+                                               queue_size=1)
+        self.ground_truth_sub = rospy.Subscriber(self.ground_truth_topic,
+                                                Odometry,
+                                                self.on_pose,
+                                                queue_size=1)
+
+    def on_pose(self, msg):
+        self.pose = msg.pose.pose
+        self.header = msg.header
+        if not self.initialized:
+            self.initialized = True
+
+    def publish_fake_vision(self):
+        if self.initialized:
+            p = PoseWithCovarianceStamped()
+            p.header = self.header
+            p.pose.pose = self.pose
+            self.fake_vision_pub.publish(p)
+
+    def run(self):
+        while not rospy.is_shutdown():
+            self.publish_fake_vision()
+            self.rate.sleep()
+        rospy.loginfo("[{}] Shutting down...".format(rospy.get_name()))
+
+
+def main():
+    node = FakeVisionNode("fake_vision")    
+    node.run()
+
+
+if __name__ == "__main__":
+    main()
