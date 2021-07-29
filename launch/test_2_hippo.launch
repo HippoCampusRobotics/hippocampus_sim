@@ -49,8 +49,5 @@
         <include file="$(find hippocampus_sim)/launch/fake_vision.launch">
             <arg name="topic_name" value="/ground_truth/uuv_hippocampus_2/state" />
         </include>
-
     </group>
-
-
 </launch>

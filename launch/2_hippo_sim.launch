@@ -43,7 +43,7 @@
             <arg name="tgt_component" value="1" />
         </include> 
 
-        <!-- vehcile model and config -->
+        <!-- vehcile model and px4 config -->
         <arg name="est" default="ekf2" />
         <arg name="vehicle" default="uuv_hippocampus" />
         <env name="PX4_SIM_MODEL" value="$(arg vehicle)" />
@@ -69,7 +69,7 @@
             <arg name="tgt_component" value="1" />
         </include> 
 
-        <!-- vehcile model and config -->
+        <!-- vehicle model and px4 config -->
         <arg name="est" default="ekf2" />
         <arg name="vehicle" default="uuv_hippocampus" />
         <env name="PX4_SIM_MODEL" value="$(arg vehicle)" />
