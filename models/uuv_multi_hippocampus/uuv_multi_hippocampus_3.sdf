@@ -723,7 +723,7 @@
         <link name='uuv_hippocampus_2/imu_link'>    <!-- Might need an additional relative_to=""... -->
             <pose relative_to="base_link_2">0 0 0 0 0 0</pose>
             <inertial>
-                <pose>0 0 0 0 0 0</pose>
+                <pose relative_to="base_link_2">0 0 0 0 0 0</pose>
                 <mass>0.015</mass>
                 <inertia>
                     <ixx>1e-05</ixx>

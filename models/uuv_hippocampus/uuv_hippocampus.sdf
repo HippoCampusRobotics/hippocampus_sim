@@ -192,7 +192,7 @@
                     <spring_reference>0</spring_reference>
                     <spring_stiffness>0</spring_stiffness>
                 </dynamics>
-                <use_parent_model_frame>1</use_parent_model_frame>
+                <use_parent_model_frame>1</use_parent_model_frame> <!-- in older sdf versions, the axis unit vector was expressed in the parent link's model frame, now it is expressed in joint frame, this tag replicates old behaviour -->
             </axis>
         </joint>
 
@@ -381,7 +381,7 @@
                     </mesh>
                 </geometry>
                 <material>
-                    <script>
+                    <script>/rotor_${number}
                         <name>Gazebo/Blue</name>
                         <uri>file://media/materials/scripts/gazebo.material</uri>
                     </script>

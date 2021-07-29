@@ -15,15 +15,17 @@
     <arg name="P" default="0.0" />
     <arg name="R" default="0.0" />
     <arg name="interactive" default="true" />
+    <arg name="run_px4" default="true"/>
 
     <!-- Gazebo spawners, PX4, Mavros -->
     <include file="$(find hippocampus_sim)/launch/2_hippo_sim.launch">
+        <arg name="interactive" value="$(arg interactive)" />
+        <arg name="run_px4" value="$(arg run_px4)" />
         <arg name="vehicle_1_name" value="$(arg vehicle_1_name)" />
         <arg name="vehicle_2_name" value="$(arg vehicle_2_name)" />
         <arg name="gui" value="$(arg gui)" />
         <arg name="verbose" value="$(arg verbose)" />
         <arg name="rviz" value="$(arg rviz)" />
-        <arg name="interactive" value="$(arg interactive)" />
 
         <arg name="x" value="$(arg x)" />
         <arg name="y" value="$(arg y)" />
