@@ -6,7 +6,7 @@
         <static>0</static>  <!-- 1: ignore physics for now for debugging-->
 
         <!-- uuv 1 --> 
-        <link name="base_link_1">
+        <link name="uuv00/base_link">
 
             <pose>0 0 0 0 0 0</pose>
             <inertial>
@@ -29,7 +29,7 @@
                     <izz>0.010717</izz>
                 </inertia>
             </inertial>
-            <visual name="base_link_1_inertia_visual">
+            <visual name="uuv00/base_link_inertia_visual">
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
@@ -48,7 +48,7 @@
         </link>
 
         <!-- Water baro plugin doesn't work currently? -->
-        <!-- <link name="uuv_hippocampus_1/barometer_water_link">
+        <!-- <link name="uuv00/barometer_water_link">
             <pose>0 0 -0.05 0 0 0</pose>
             <inertial>
                 <mass>0.001</mass>
@@ -61,7 +61,7 @@
                     <izz>1e-8</izz>
                 </inertia>
             </inertial>
-            <visual name="uuv_hippocampus_1/barometer_water_visual">
+            <visual name="uuv00/barometer_water_visual">
                 <geometry>
                     <cylinder>
                         <radius>0.0125</radius>
@@ -77,18 +77,18 @@
             </visual>
         </link> -->
         
-        <!-- <plugin name="uuv_hippocampus_1/baro_water" filename="libgazebo_barometer_water_plugin.so">
+        <!-- <plugin name="uuv00/baro_water" filename="libgazebo_barometer_water_plugin.so">
             <pubRate>50</pubRate>
             <baroTopic>baro</baroTopic>
             <noise>100</noise>
         </plugin> -->
 
-        <!-- <joint name="uuv_hippocampus_1/barometer_water_joint" type="fixed">
-            <parent>base_link_1</parent>
-            <child>uuv_hippocampus_1/barometer_water_link</child>
+        <!-- <joint name="uuv00/barometer_water_joint" type="fixed">
+            <parent>uuv00/base_link</parent>
+            <child>uuv00/barometer_water_link</child>
         </joint> -->
 
-        <!-- <link name="uuv_hippocampus_1/vertical_camera/camera_link">
+        <!-- <link name="uuv00/vertical_camera/camera_link">
             <gravity>0</gravity>
             <pose>0.05 0 -0.02 0 1.57 0</pose>
             <inertial>
@@ -140,9 +140,9 @@
             </sensor>
         </link>
 
-        <joint name="uuv_hippocampus_1/camera_joint" type="fixed">
+        <joint name="uuv00/camera_joint" type="fixed">
             <parent>base_link_1</parent>
-            <child>uuv_hippocampus_1/vertical_camera/camera_link</child>
+            <child>uuv00/vertical_camera/camera_link</child>
         </joint> -->
 
         <!--
@@ -153,7 +153,7 @@
         East-Down) coordinate frame whereas Gazebo uses a ENU (East-North-Up) coordinate frame.
     -->
         <!-- IMU link -->
-        <link name='uuv_hippocampus_1/imu_link'>
+        <link name='uuv00/imu_link'>
             <pose>0 0 0 0 0 0</pose>
             <inertial>
                 <pose>0 0 0 0 0 0</pose>
@@ -167,7 +167,7 @@
                     <izz>1e-05</izz>
                 </inertia>
             </inertial>
-            <visual name="uuv_hippocampus_1/imu_link_visual">
+            <visual name="uuv00/imu_link_visual">
                 <geometry>
                     <cylinder>
                         <radius>0.01</radius>
@@ -184,9 +184,9 @@
         </link>
 
         <!-- IMU joint -->
-        <joint name='uuv_hippocampus_1/imu_joint' type='revolute'>
-            <child>uuv_hippocampus_1/imu_link</child>
-            <parent>base_link_1</parent>
+        <joint name='uuv00/imu_joint' type='revolute'>
+            <child>uuv00/imu_link</child>
+            <parent>uuv00/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -209,7 +209,7 @@
 -->
         <!-- CCW 1-->
         <!-- rotor_0 link -->
-        <link name='uuv_hippocampus_1/rotor_0'>
+        <link name='uuv00/rotor_0'>
             <pose>-0.05 0.0481 0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
@@ -223,7 +223,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_1/rotor_0_visual'>
+            <visual name='uuv00/rotor_0_visual'>
                 <pose>0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -242,9 +242,9 @@
         </link>
 
         <!-- rotor_0 joint -->
-        <joint name='uuv_hippocampus_1/rotor_0_joint' type='revolute'>
-            <parent>base_link_1</parent>
-            <child>uuv_hippocampus_1/rotor_0</child>
+        <joint name='uuv00/rotor_0_joint' type='revolute'>
+            <parent>uuv00/base_link</parent>
+            <child>uuv00/rotor_0</child>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -261,7 +261,7 @@
 
         <!-- CW 2 -->
         <!-- rotor_1 link -->
-        <link name='uuv_hippocampus_1/rotor_1'>
+        <link name='uuv00/rotor_1'>
             <pose>-0.05 -0.0481 0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
@@ -275,7 +275,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_1/rotor_1_visual'>
+            <visual name='uuv00/rotor_1_visual'>
                 <pose>0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -294,9 +294,9 @@
         </link>
 
         <!-- rotor_1 joint -->
-        <joint name='uuv_hippocampus_1/rotor_1_joint' type='revolute'>
-            <child>uuv_hippocampus_1/rotor_1</child>
-            <parent>base_link_1</parent>
+        <joint name='uuv00/rotor_1_joint' type='revolute'>
+            <child>uuv00/rotor_1</child>
+            <parent>uuv00/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -313,7 +313,7 @@
 
         <!-- CCW 3 -->
         <!-- rotor_2 link -->
-        <link name='uuv_hippocampus_1/rotor_2'>
+        <link name='uuv00/rotor_2'>
             <pose>-0.05 -0.0481 -0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
@@ -327,7 +327,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_1/rotor_2_visual'>
+            <visual name='uuv00/rotor_2_visual'>
                 <pose>0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -346,9 +346,9 @@
         </link>
 
         <!-- rotor_2 joint -->
-        <joint name='uuv_hippocampus_1/rotor_2_joint' type='revolute'>
-            <child>uuv_hippocampus_1/rotor_2</child>
-            <parent>base_link_1</parent>
+        <joint name='uuv00/rotor_2_joint' type='revolute'>
+            <child>uuv00/rotor_2</child>
+            <parent>uuv00/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -365,7 +365,7 @@
 
         <!-- CW 4 -->
         <!-- rotor_3 link -->
-        <link name='uuv_hippocampus_1/rotor_3'>
+        <link name='uuv00/rotor_3'>
             <pose>-0.05 0.0481 -0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
@@ -379,7 +379,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_1/rotor_3_visual'>
+            <visual name='uuv00/rotor_3_visual'>
                 <pose>0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -398,9 +398,9 @@
         </link>
 
         <!-- rotor_3 joint -->
-        <joint name='uuv_hippocampus_1/rotor_3_joint' type='revolute'>
-            <child>uuv_hippocampus_1/rotor_3</child>
-            <parent>base_link_1</parent>
+        <joint name='uuv00/rotor_3_joint' type='revolute'>
+            <child>uuv00/rotor_3</child>
+            <parent>uuv00/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -428,42 +428,42 @@
 
         <!-- Plugins -->
 
-        <plugin name="ground_truth/uuv_hippocampus_1" filename="libgazebo_ros_p3d.so">
+        <plugin name="ground_truth/uuv00" filename="libgazebo_ros_p3d.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
-            <bodyName>base_link_1</bodyName>
-            <topicName>ground_truth/uuv_hippocampus_1/state</topicName>
+            <bodyName>uuv00/base_link</bodyName>
+            <topicName>ground_truth/uuv00/state</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>map</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>
             <rpyOffsets>0 0 0</rpyOffsets>
         </plugin>
 
-        <plugin name='uuv_hippocampus_1/groundtruth_plugin' filename='libgazebo_groundtruth_plugin.so'>
+        <plugin name='uuv00/groundtruth_plugin' filename='libgazebo_groundtruth_plugin.so'>
             <robotNamespace />
         </plugin>
 
-        <plugin name='uuv_hippocampus_1/uuv_forces' filename='libgazebo_uuv_plugin.so'>
+        <plugin name='uuv00/uuv_forces' filename='libgazebo_uuv_plugin.so'>
             <buoyancy>
-                <link_name>base_link_1</link_name>
+                <link_name>uuv00/base_link</link_name>
                 <origin>0 0 0.01</origin>
                 <compensation>1.01</compensation>
                 <height_scale_limit>0.05</height_scale_limit>
             </buoyancy>
             <robotNamespace />
-            <baseLinkName>base_link_1</baseLinkName>
+            <baseLinkName>uuv00/base_link</baseLinkName>
             <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
             <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular>
             <dampingLinear>5.39 17.36 17.36</dampingLinear>
             <dampingAngular>0.00114 0.007 0.007</dampingAngular>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_1/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv00/motor_speed</commandSubTopic>
         </plugin>
 
-        <plugin name='uuv_hippocampus_1/top_port_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv00/top_port_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_1/rotor_0_joint</jointName>
-            <linkName>uuv_hippocampus_1/rotor_0</linkName>
+            <jointName>uuv00/rotor_0_joint</jointName>
+            <linkName>uuv00/rotor_0</linkName>
             <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -472,16 +472,16 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_1/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv00/motor_speed</commandSubTopic>
             <motorNumber>0</motorNumber>
             <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
-        <plugin name='uuv_hippocampus_1/top_starboard_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv00/top_starboard_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_1/rotor_1_joint</jointName>
-            <linkName>uuv_hippocampus_1/rotor_1</linkName>
+            <jointName>uuv00/rotor_1_joint</jointName>
+            <linkName>uuv00/rotor_1</linkName>
             <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -490,16 +490,16 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_1/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv00/motor_speed</commandSubTopic>
             <motorNumber>1</motorNumber>
             <motorSpeedPubTopic>/motor_speed/1</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
-        <plugin name='uuv_hippocampus_1/bottom_starboard_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv00/bottom_starboard_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_1/rotor_2_joint</jointName>
-            <linkName>uuv_hippocampus_1/rotor_2</linkName>
+            <jointName>uuv00/rotor_2_joint</jointName>
+            <linkName>uuv00/rotor_2</linkName>
             <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -508,16 +508,16 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_1/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv00/motor_speed</commandSubTopic>
             <motorNumber>2</motorNumber>
             <motorSpeedPubTopic>/motor_speed/2</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
-        <plugin name='uuv_hippocampus_1/bottom_port_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv00/bottom_port_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_1/rotor_3_joint</jointName>
-            <linkName>uuv_hippocampus_1/rotor_3</linkName>
+            <jointName>uuv00/rotor_3_joint</jointName>
+            <linkName>uuv00/rotor_3</linkName>
             <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -526,32 +526,32 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_1/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv00/motor_speed</commandSubTopic>
             <motorNumber>3</motorNumber>
             <motorSpeedPubTopic>/motor_speed/3</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
 
-        <plugin name='uuv_hippocampus_1/magnetometer_plugin' filename='libgazebo_magnetometer_plugin.so'>
+        <plugin name='uuv00/magnetometer_plugin' filename='libgazebo_magnetometer_plugin.so'>
             <robotNamespace />
             <pubRate>100</pubRate>
             <noiseDensity>0.0004</noiseDensity>
             <randomWalk>6.4e-06</randomWalk>
             <biasCorrelationTime>600</biasCorrelationTime>
-            <magTopic>uuv_hippocampus_1/mag</magTopic>
+            <magTopic>uuv00/mag</magTopic>
         </plugin>
 
-        <plugin name='uuv_hippocampus_1/barometer_plugin' filename='libgazebo_barometer_plugin.so'>
+        <plugin name='uuv00/barometer_plugin' filename='libgazebo_barometer_plugin.so'>
             <robotNamespace />
             <pubRate>50</pubRate>
-            <baroTopic>uuv_hippocampus_1/baro</baroTopic>
+            <baroTopic>uuv00/baro</baroTopic>
         </plugin>
 
-        <plugin name='uuv_hippocampus_1/mavlink_interface' filename='libgazebo_mavlink_interface.so'>
+        <plugin name='uuv00/mavlink_interface' filename='libgazebo_mavlink_interface.so'>
             <robotNamespace />
-            <imuSubTopic>uuv_hippocampus_1/imu</imuSubTopic>
-            <magSubTopic>uuv_hippocampus_1/mag</magSubTopic>
-            <baroSubTopic>uuv_hippocampus_1/baro</baroSubTopic>
+            <imuSubTopic>uuv00/imu</imuSubTopic>
+            <magSubTopic>uuv00/mag</magSubTopic>
+            <baroSubTopic>uuv00/baro</baroSubTopic>
             <mavlink_addr>INADDR_ANY</mavlink_addr>
             <mavlink_udp_port>14560</mavlink_udp_port>
             <mavlink_tcp_port>4560</mavlink_tcp_port>
@@ -568,7 +568,7 @@
             <send_odometry>false</send_odometry>
             <enable_lockstep>true</enable_lockstep>
             <use_tcp>true</use_tcp>
-            <motorSpeedCommandPubTopic>/gazebo/command/uuv_hippocampus_1/motor_speed</motorSpeedCommandPubTopic>
+            <motorSpeedCommandPubTopic>/gazebo/command/uuv00/motor_speed</motorSpeedCommandPubTopic>
 
             <!-- control channels, this way for every channel different settings can be realized -->
             <control_channels>
@@ -611,10 +611,10 @@
             </control_channels>
         </plugin>
 
-        <plugin name='uuv_hippocampus_1/gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
+        <plugin name='uuv00/gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
             <robotNamespace />
-            <linkName>uuv_hippocampus_1/imu_link</linkName>
-            <imuTopic>uuv_hippocampus_1/imu</imuTopic>
+            <linkName>uuv00/imu_link</linkName>
+            <imuTopic>uuv00/imu</imuTopic>
             <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
             <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
             <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
@@ -628,7 +628,7 @@
     
 
         <!-- uuv 2 -->
-        <link name="base_link_2">
+        <link name="uuv01/base_link">
 
             <pose>-0.5 0 0 0 0 0</pose>
             <inertial>
@@ -651,7 +651,7 @@
                     <izz>0.010717</izz>
                 </inertia>
             </inertial>
-            <visual name="base_link_2_inertia_visual">
+            <visual name="uuv01/base_link/inertia_visual">
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
@@ -669,7 +669,7 @@
             <velocity_decay />
         </link>
 
-        <!-- <link name="uuv_hippocampus_2/vertical_camera/camera_link">
+        <!-- <link name="uuv01/vertical_camera/camera_link">
             <gravity>0</gravity>
             <pose>0.05 0 -0.02 0 1.57 0</pose>
             <inertial>
@@ -721,9 +721,9 @@
             </sensor>
         </link>
 
-        <joint name="uuv_hippocampus_2/camera_joint" type="fixed">
-            <parent>base_link_2</parent>
-            <child>uuv_hippocampus_2/vertical_camera/camera_link</child>
+        <joint name="uuv01/camera_joint" type="fixed">
+            <parent>uuv01/base_link</parent>
+            <child>uuv01/vertical_camera/camera_link</child>
         </joint> -->
 
         <!--
@@ -734,8 +734,8 @@
         East-Down) coordinate frame whereas Gazebo uses a ENU (East-North-Up) coordinate frame.
     -->
         <!-- IMU link -->
-        <link name='uuv_hippocampus_2/imu_link'>
-            <pose relative_to="base_link_2" >0 0 0 0 0 0</pose>
+        <link name='uuv01/imu_link'>
+            <pose relative_to="uuv01/base_link" >0 0 0 0 0 0</pose>
             <inertial>
                 <pose>0 0 0 0 0 0</pose>
                 <mass>0.015</mass>
@@ -748,7 +748,7 @@
                     <izz>1e-05</izz>
                 </inertia>
             </inertial>
-            <visual name="uuv_hippocampus_2/imu_link_visual">
+            <visual name="uuv01/imu_link_visual">
                 <geometry>
                     <cylinder>
                         <radius>0.01</radius>
@@ -765,9 +765,9 @@
         </link>
 
         <!-- IMU joint -->
-        <joint name='uuv_hippocampus_2/imu_joint' type='revolute'>
-            <child>uuv_hippocampus_2/imu_link</child>
-            <parent>base_link_2</parent>
+        <joint name='uuv01/imu_joint' type='revolute'>
+            <child>uuv01/imu_link</child>
+            <parent>uuv01/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -790,8 +790,8 @@
 -->
         <!-- CCW 1-->
         <!-- rotor_0 link -->
-        <link name='uuv_hippocampus_2/rotor_0'>
-            <pose relative_to="base_link_2">-0.05 0.0481 0.0481 0 1.570796 0</pose>
+        <link name='uuv01/rotor_0'>
+            <pose relative_to="uuv01/base_link">-0.05 0.0481 0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
                 <mass>0.005</mass>
@@ -804,7 +804,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_2/rotor_0_visual'>
+            <visual name='uuv01/rotor_0_visual'>
                 <pose>0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -823,9 +823,9 @@
         </link>
 
         <!-- rotor_0 joint -->
-        <joint name='uuv_hippocampus_2/rotor_0_joint' type='revolute'>
-            <parent>base_link_2</parent>
-            <child>uuv_hippocampus_2/rotor_0</child>
+        <joint name='uuv01/rotor_0_joint' type='revolute'>
+            <parent>uuv01/base_link</parent>
+            <child>uuv01/rotor_0</child>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -842,8 +842,8 @@
 
         <!-- CW 2 -->
         <!-- rotor_1 link -->
-        <link name='uuv_hippocampus_2/rotor_1'>
-            <pose relative_to="base_link_2">-0.05 -0.0481 0.0481 0 1.570796 0</pose>
+        <link name='uuv01/rotor_1'>
+            <pose relative_to="uuv01/base_link">-0.05 -0.0481 0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
                 <mass>0.005</mass>
@@ -856,7 +856,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_2/rotor_1_visual'>
+            <visual name='uuv01/rotor_1_visual'>
                 <pose>0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -875,9 +875,9 @@
         </link>
 
         <!-- rotor_1 joint -->
-        <joint name='uuv_hippocampus_2/rotor_1_joint' type='revolute'>
-            <child>uuv_hippocampus_2/rotor_1</child>
-            <parent>base_link_2</parent>
+        <joint name='uuv01/rotor_1_joint' type='revolute'>
+            <child>uuv01/rotor_1</child>
+            <parent>uuv01/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -894,8 +894,8 @@
 
         <!-- CCW 3 -->
         <!-- rotor_2 link -->
-        <link name='uuv_hippocampus_2/rotor_2'>
-            <pose relative_to="base_link_2">-0.05 -0.0481 -0.0481 0 1.570796 0</pose>
+        <link name='uuv01/rotor_2'>
+            <pose relative_to="uuv01/base_link">-0.05 -0.0481 -0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
                 <mass>0.005</mass>
@@ -908,7 +908,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_2/rotor_2_visual'>
+            <visual name='uuv01/rotor_2_visual'>
                 <pose >0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -927,9 +927,9 @@
         </link>
 
         <!-- rotor_2 joint -->
-        <joint name='uuv_hippocampus_2/rotor_2_joint' type='revolute'>
-            <child>uuv_hippocampus_2/rotor_2</child>
-            <parent>base_link_2</parent>
+        <joint name='uuv01/rotor_2_joint' type='revolute'>
+            <child>uuv01/rotor_2</child>
+            <parent>uuv01/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -946,8 +946,8 @@
 
         <!-- CW 4 -->
         <!-- rotor_3 link -->
-        <link name='uuv_hippocampus_2/rotor_3'>
-            <pose relative_to="base_link_2">-0.05 0.0481 -0.0481 0 1.570796 0</pose>
+        <link name='uuv01/rotor_3'>
+            <pose relative_to="uuv01/base_link">-0.05 0.0481 -0.0481 0 1.570796 0</pose>
             <inertial>
                 <pose>0 0 0 0 -0 0</pose>
                 <mass>0.005</mass>
@@ -960,7 +960,7 @@
                     <izz>0.000274004</izz>
                 </inertia>
             </inertial>
-            <visual name='uuv_hippocampus_2/rotor_3_visual'>
+            <visual name='uuv01/rotor_3_visual'>
                 <pose>0 0 0 0 -1.570796 0</pose>
                 <geometry>
                     <mesh>
@@ -979,9 +979,9 @@
         </link>
 
         <!-- rotor_3 joint -->
-        <joint name='uuv_hippocampus_2/rotor_3_joint' type='revolute'>
-            <child>uuv_hippocampus_2/rotor_3</child>
-            <parent>base_link_2</parent>
+        <joint name='uuv01/rotor_3_joint' type='revolute'>
+            <child>uuv01/rotor_3</child>
+            <parent>uuv01/base_link</parent>
             <axis>
                 <xyz>1 0 0</xyz>
                 <limit>
@@ -1009,42 +1009,42 @@
 
         <!-- Plugins -->
 
-        <plugin name="ground_truth/uuv_hippocampus_2" filename="libgazebo_ros_p3d.so">
+        <plugin name="ground_truth/uuv01" filename="libgazebo_ros_p3d.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
-            <bodyName>base_link_2</bodyName>
-            <topicName>ground_truth/uuv_hippocampus_2/state</topicName>
+            <bodyName>uuv01/base_link</bodyName>
+            <topicName>ground_truth/uuv01/state</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>map</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>
             <rpyOffsets>0 0 0</rpyOffsets>
         </plugin>
 
-        <plugin name='uuv_hippocampus_2/groundtruth_plugin' filename='libgazebo_groundtruth_plugin.so'>
+        <plugin name='uuv01/groundtruth_plugin' filename='libgazebo_groundtruth_plugin.so'>
             <robotNamespace />
         </plugin>
 
-        <plugin name='uuv_hippocampus_2/uuv_forces' filename='libgazebo_uuv_plugin.so'>
+        <plugin name='uuv01/uuv_forces' filename='libgazebo_uuv_plugin.so'>
             <buoyancy>
-                <link_name>base_link_2</link_name>
+                <link_name>uuv01/base_link</link_name>
                 <origin>0 0 0.01</origin>
                 <compensation>1.01</compensation>
                 <height_scale_limit>0.05</height_scale_limit>
             </buoyancy>
             <robotNamespace />
-            <baseLinkName>base_link_2</baseLinkName>
+            <baseLinkName>uuv01/base_link</baseLinkName>
             <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
             <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular>
             <dampingLinear>5.39 17.36 17.36</dampingLinear>
             <dampingAngular>0.00114 0.007 0.007</dampingAngular>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_2/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv01/motor_speed</commandSubTopic>
         </plugin>
 
-        <plugin name='uuv_hippocampus_2/top_port_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv01/top_port_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_2/rotor_0_joint</jointName>
-            <linkName>uuv_hippocampus_2/rotor_0</linkName>
+            <jointName>uuv01/rotor_0_joint</jointName>
+            <linkName>uuv01/rotor_0</linkName>
             <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -1053,16 +1053,16 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_2/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv01/motor_speed</commandSubTopic>
             <motorNumber>0</motorNumber>
             <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
-        <plugin name='uuv_hippocampus_2/top_starboard_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv01/top_starboard_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_2/rotor_1_joint</jointName>
-            <linkName>uuv_hippocampus_2/rotor_1</linkName>
+            <jointName>uuv01/rotor_1_joint</jointName>
+            <linkName>uuv01/rotor_1</linkName>
             <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -1071,16 +1071,16 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_2/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv01/motor_speed</commandSubTopic>
             <motorNumber>1</motorNumber>
             <motorSpeedPubTopic>/motor_speed/1</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
-        <plugin name='uuv_hippocampus_2/bottom_starboard_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv01/bottom_starboard_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_2/rotor_2_joint</jointName>
-            <linkName>uuv_hippocampus_2/rotor_2</linkName>
+            <jointName>uuv01/rotor_2_joint</jointName>
+            <linkName>uuv01/rotor_2</linkName>
             <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -1089,16 +1089,16 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_2/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv01/motor_speed</commandSubTopic>
             <motorNumber>2</motorNumber>
             <motorSpeedPubTopic>/motor_speed/2</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
-        <plugin name='uuv_hippocampus_2/bottom_port_motor_model' filename='libgazebo_motor_model.so'>
+        <plugin name='uuv01/bottom_port_motor_model' filename='libgazebo_motor_model.so'>
             <robotNamespace />
             <reversible>true</reversible>
-            <jointName>uuv_hippocampus_2/rotor_3_joint</jointName>
-            <linkName>uuv_hippocampus_2/rotor_3</linkName>
+            <jointName>uuv01/rotor_3_joint</jointName>
+            <linkName>uuv01/rotor_3</linkName>
             <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
@@ -1107,32 +1107,32 @@
             <momentConstant>0.0024</momentConstant>
             <rotorDragCoefficient>0.0</rotorDragCoefficient>
             <rollingMomentCoefficient>0.0</rollingMomentCoefficient>
-            <commandSubTopic>/gazebo/command/uuv_hippocampus_2/motor_speed</commandSubTopic>
+            <commandSubTopic>/gazebo/command/uuv01/motor_speed</commandSubTopic>
             <motorNumber>3</motorNumber>
             <motorSpeedPubTopic>/motor_speed/3</motorSpeedPubTopic>
             <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
         </plugin>
 
-        <plugin name='uuv_hippocampus_2/magnetometer_plugin' filename='libgazebo_magnetometer_plugin.so'>
+        <plugin name='uuv01/magnetometer_plugin' filename='libgazebo_magnetometer_plugin.so'>
             <robotNamespace />
             <pubRate>100</pubRate>
             <noiseDensity>0.0004</noiseDensity>
             <randomWalk>6.4e-06</randomWalk>
             <biasCorrelationTime>600</biasCorrelationTime>
-            <magTopic>uuv_hippocampus_2/mag</magTopic>
+            <magTopic>uuv01/mag</magTopic>
         </plugin>
 
-        <plugin name='uuv_hippocampus_2/barometer_plugin' filename='libgazebo_barometer_plugin.so'>
+        <plugin name='uuv01/barometer_plugin' filename='libgazebo_barometer_plugin.so'>
             <robotNamespace />
             <pubRate>50</pubRate>
-            <baroTopic>uuv_hippocampus_2/baro</baroTopic>
+            <baroTopic>uuv01/baro</baroTopic>
         </plugin>
 
-        <plugin name='uuv_hippocampus_2/mavlink_interface' filename='libgazebo_mavlink_interface.so'>
+        <plugin name='uuv01/mavlink_interface' filename='libgazebo_mavlink_interface.so'>
             <robotNamespace />
-            <imuSubTopic>uuv_hippocampus_2/imu</imuSubTopic>
-            <magSubTopic>uuv_hippocampus_2/mag</magSubTopic>
-            <baroSubTopic>uuv_hippocampus_2/baro</baroSubTopic>
+            <imuSubTopic>uuv01/imu</imuSubTopic>
+            <magSubTopic>uuv01/mag</magSubTopic>
+            <baroSubTopic>uuv01/baro</baroSubTopic>
             <mavlink_addr>INADDR_ANY</mavlink_addr>
             <mavlink_udp_port>14561</mavlink_udp_port>
             <mavlink_tcp_port>4561</mavlink_tcp_port>
@@ -1149,7 +1149,7 @@
             <send_odometry>false</send_odometry>
             <enable_lockstep>true</enable_lockstep>
             <use_tcp>true</use_tcp>
-            <motorSpeedCommandPubTopic>/gazebo/command/uuv_hippocampus_2/motor_speed</motorSpeedCommandPubTopic>
+            <motorSpeedCommandPubTopic>/gazebo/command/uuv01/motor_speed</motorSpeedCommandPubTopic>
 
             <!-- control channels, this way for every channel different settings can be realized -->
             <control_channels>
@@ -1192,10 +1192,10 @@
             </control_channels>
         </plugin>
 
-        <plugin name='uuv_hippocampus_2/gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
+        <plugin name='uuv01/gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
             <robotNamespace />
-            <linkName>uuv_hippocampus_2/imu_link</linkName>
-            <imuTopic>uuv_hippocampus_2/imu</imuTopic>
+            <linkName>uuv01/imu_link</linkName>
+            <imuTopic>uuv01/imu</imuTopic>
             <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
             <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
             <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
@@ -1206,11 +1206,11 @@
             <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
         </plugin>
 
-        <!-- add joint between uuv1 baselink and uuv2, need fixed translation from here to uuv2 baselink-->
+        <!-- add joint between uuv1 baselink and uuv2 -->
         <joint name="joint_1" type="revolute">
-            <pose relative_to="base_link_1">-0.25 0 0 0 0 0</pose>
-            <parent>base_link_1</parent>
-            <child>base_link_2</child>
+            <pose relative_to="uuv00/base_link">-0.25 0 0 0 0 0</pose>
+            <parent>uuv00/base_link</parent>
+            <child>uuv01/base_link</child>
             <axis>
                 <xyz>0 0 1</xyz>
                 <limit>
@@ -1226,5 +1226,13 @@
                 <use_parent_model_frame>1</use_parent_model_frame>
             </axis>
         </joint>
+
+        <!-- joint state publisher -->
+        <plugin name="joint_1_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+            <jointName>joint_1</jointName>
+            <updateRate>50</updateRate>
+            <alwaysOn>true</alwaysOn>
+        </plugin>
+
     </model>
 </sdf>
