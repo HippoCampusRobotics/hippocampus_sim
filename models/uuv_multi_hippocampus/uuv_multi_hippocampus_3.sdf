@@ -418,7 +418,7 @@
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
             <bodyName>uuv00/base_link</bodyName>
-            <topicName>ground_truth/uuv00/state</topicName>
+            <topicName>uuv00/ground_truth/state</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>map</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>
@@ -985,7 +985,7 @@
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
             <bodyName>uuv01/base_link</bodyName>
-            <topicName>ground_truth/uuv01/state</topicName>
+            <topicName>uuv01/ground_truth/state</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>map</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>
@@ -1182,7 +1182,7 @@
         <!-- uuv 3 --> 
         <link name="uuv02/base_link">
 
-            <pose>-0.5 0 0 0 0 0</pose>
+            <pose relative_to="uuv01/base_link">-0.5 0 0 0 0 0</pose>
             <inertial>
                 <pose>0 0 0 0 0 0</pose>
                 <!--
@@ -1213,7 +1213,7 @@
                 </geometry>
                 <material>
                     <script>
-                        <name>Gazebo/Grey</name>
+                        <name>Gazebo/Orange</name>
                         <uri>file://media/materials/scripts/gazebo.material</uri>
                     </script>
                 </material>
@@ -1592,7 +1592,7 @@
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
             <bodyName>uuv02/base_link</bodyName>
-            <topicName>ground_truth/uuv02/state</topicName>
+            <topicName>uuv02/ground_truth/state</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>map</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>

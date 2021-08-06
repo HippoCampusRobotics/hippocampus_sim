@@ -1,8 +1,3 @@
 <launch>
-    <arg name="topic_name" default="ground_truth/state" />
-
-    <node name="fake_vision_node" pkg="hippocampus_sim" type="fake_vision_node" output="screen" >
-        <param name="topic_name" value="$(arg topic_name)" />
-    </node>
-
+    <node name="fake_vision_node" pkg="hippocampus_sim" type="fake_vision_node" output="screen" />
 </launch>

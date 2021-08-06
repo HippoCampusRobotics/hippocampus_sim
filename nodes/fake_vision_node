@@ -19,7 +19,7 @@ class FakeVisionNode(Node):
         self.fake_vision_pub = rospy.Publisher("mavros/vision_pose/pose_cov",
                                                PoseWithCovarianceStamped,
                                                queue_size=1)
-        self.ground_truth_sub = rospy.Subscriber(self.ground_truth_topic,
+        self.ground_truth_sub = rospy.Subscriber("ground_truth/state",
                                                 Odometry,
                                                 self.on_pose,
                                                 queue_size=1)

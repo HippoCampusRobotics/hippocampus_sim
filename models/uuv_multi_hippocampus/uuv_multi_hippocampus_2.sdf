@@ -432,7 +432,7 @@
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
             <bodyName>uuv00/base_link</bodyName>
-            <topicName>ground_truth/uuv00/state</topicName>
+            <topicName>uuv00/ground_truth/state</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>map</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>
@@ -1013,7 +1013,7 @@
             <alwaysOn>true</alwaysOn>
             <updateRate>30.0</updateRate>
             <bodyName>uuv01/base_link</bodyName>
-            <topicName>ground_truth/uuv01/state</topicName>
+            <topicName>uuv01/ground_truth/state</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>map</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>
