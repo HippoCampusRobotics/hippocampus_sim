@@ -13,8 +13,6 @@ class FakeVisionNode(Node):
         self.pose = None
         self.header = None
         self.initialized = False
-        self.ground_truth_topic = Node.get_param("~topic_name")
-        rospy.loginfo("[{}] Ground truth topic: [{}]".format(rospy.get_name(), self.ground_truth_topic))
 
         self.fake_vision_pub = rospy.Publisher("mavros/vision_pose/pose_cov",
                                                PoseWithCovarianceStamped,
