@@ -17,6 +17,7 @@
     <include file="$(find control)/launch/joystick_control.launch">
       <arg name="use_ground_truth" value="true" />
       <arg name="use_external_controller" value="false" />
+      <arg name="vehicle_name" value="$(arg vehicle_name)" />
     </include>
 
     <!-- add additional vehicle specific nodes here, for example:  -->
