@@ -7,14 +7,8 @@
 
   <!-- launch robot specific nodes in namespace -->
   <group ns="$(arg vehicle_name)">
-    <!-- path description, path follower, depth control, attitude mixer -->
-    <!-- 
-    <include file="$(find control)/launch/path_tracking.launch">
-      <arg name="use_ground_truth" value="true" />
-      <arg name="use_external_controller" value="false" />
-    </include>
-    -->
-    <include file="$(find control)/launch/joystick_control.launch">
+
+    <include file="$(find control)/launch/inc_joystick_control.launch">
       <arg name="use_ground_truth" value="true" />
       <arg name="use_external_controller" value="false" />
       <arg name="vehicle_name" value="$(arg vehicle_name)" />
